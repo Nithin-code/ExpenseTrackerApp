@@ -1,6 +1,7 @@
 package com.nithin.expensetrackerapp.presentation.dashboard
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -80,7 +82,7 @@ fun DashboardTitle(
 
     Row(
         modifier = modifier
-            .padding(10.dp),
+            .padding(vertical = 10.dp, horizontal = 20.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
 
@@ -184,7 +186,8 @@ fun AllExpensesList(
             )
 
             Card(
-                modifier = Modifier
+                modifier = Modifier,
+                shape = RoundedCornerShape(20.dp)
             ) {
 
                 Text(
@@ -215,6 +218,23 @@ fun AllExpensesList(
 
         }
 
+        Spacer(
+            modifier = Modifier.height(10.dp)
+        )
+
+        LazyColumn(
+            verticalArrangement = Arrangement
+                .spacedBy(15.dp)
+        ) {
+            repeat(15){
+                item {
+                    ExpenseCard()
+                }
+            }
+        }
+
+        
+
     }
 }
 
@@ -225,18 +245,51 @@ fun ExpenseCard(
 
     Card(
         modifier = modifier
+            .fillMaxWidth()
+            .height(80.dp),
+        shape = RoundedCornerShape(40.dp)
     ) {
 
         Row(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
+                .padding(15.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = Icons.Default.CheckCircle,
-                contentDescription = "Circle Check"
+                contentDescription = "Circle Check",
+
             )
+            Spacer(
+                modifier = Modifier.width(15.dp)
+            )
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+            ) {
+                Text(
+                    text = "Coffee",
+                    color = expenseCardBlackColor,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(
+                    modifier = Modifier.height(5.dp)
+                )
+                Text(
+                    text = "with shanmukha kondeti",
+                    color = textGreyDarkColor,
+                    fontWeight = FontWeight.Bold
+                )
+            }
 
-
+            Text(
+                text = "$1,500",
+                fontSize = 18.sp,
+                color = expenseCardBlackColor,
+                fontWeight = FontWeight.Bold
+            )
 
         }
 
